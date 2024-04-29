@@ -1,0 +1,7 @@
+* howbob
+
+This is a description of my howbob.
+
+** Usage
+
+To use my project, run this command: ./howbob --verbose
