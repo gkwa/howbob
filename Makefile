@@ -26,6 +26,7 @@ $(APP): $(TARGET)
 
 $(TARGET): $(SOURCES)
 	gofumpt -w $(SOURCES)
+	golangci-lint run
 	goreleaser build --single-target --snapshot --clean
 	go vet ./...
 
