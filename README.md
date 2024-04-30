@@ -1,4 +1,4 @@
-* howbob
+# howbob
 
 Generate a Brewfile from a manifest.k [kcl](https://www.kcl-lang.io) file.
 
