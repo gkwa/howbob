@@ -30,7 +30,9 @@ func Run(manifestPath, brewfilePath, checkerPath string) {
 	})
 
 	brewTemplate := `
-{{- range $pkg := . }}brew "{{ $pkg.name }}"
+{{- range $pkg := . }}
+{{- if $pkg.disabled }}# {{ end -}}
+brew "{{ $pkg.name }}"
 {{ end }}`
 
 	tmpl, err := template.New("brew").Parse(brewTemplate)
@@ -54,7 +56,10 @@ func Run(manifestPath, brewfilePath, checkerPath string) {
 
 	checkerTemplate := `#!/usr/bin/env bash
 set -x
-{{ range $pkg := . }}{{ $pkg.check_installed }}
+
+{{ range $pkg := . }}
+{{- if $pkg.disabled }}# {{ end -}}
+{{ $pkg.check_installed }}
 {{ end }}`
 
 	tmpl, err = template.New("checker").Parse(checkerTemplate)
