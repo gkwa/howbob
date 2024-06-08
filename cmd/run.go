@@ -18,7 +18,7 @@ to quickly create a Cobra application.`,
 		path, _ := cmd.Flags().GetString("path")
 		brewfile, _ := cmd.Flags().GetString("brewfile")
 		checker, _ := cmd.Flags().GetString("checker")
-		run.Run(path, brewfile, checker)
+		run.Brewfile(path, brewfile, checker)
 	},
 }
 

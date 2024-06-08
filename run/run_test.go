@@ -22,7 +22,7 @@ func TestRun(t *testing.T) {
 		t.Fatalf("Failed to copy manifest file: %v", err)
 	}
 
-	Run(manifestPath, brewfilePath, checkerPath)
+	Brewfile(manifestPath, brewfilePath, checkerPath)
 
 	if _, err := os.Stat(brewfilePath); os.IsNotExist(err) {
 		t.Errorf("Expected Brewfile to be generated, but it was not found")

@@ -9,7 +9,7 @@ import (
 	kcl "kcl-lang.io/kcl-go"
 )
 
-func Run(manifestPath, brewfilePath, checkerPath string) {
+func Brewfile(manifestPath, brewfilePath, checkerPath string) {
 	result, err := kcl.Run(manifestPath)
 	if err != nil {
 		fmt.Println(err)
