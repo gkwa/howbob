@@ -12,13 +12,14 @@ import (
 func Brewfile(manifestPath, brewfilePath, checkerPath string) {
 	result, err := kcl.Run(manifestPath)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error running KCL: %w", err))
 		return
 	}
 
 	r, err := result.First().ToMap()
 	if err != nil {
-		panic(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error converting KCL result to map: %w", err))
+		return
 	}
 
 	packages := r["packages"].([]interface{})
@@ -37,20 +38,20 @@ brew "{{ $pkg.name }}"
 
 	tmpl, err := template.New("brew").Parse(brewTemplate)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error parsing brew template: %w", err))
 		return
 	}
 
 	brewfile, err := os.Create(brewfilePath)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error creating Brewfile: %w", err))
 		return
 	}
 	defer brewfile.Close()
 
 	err = tmpl.Execute(brewfile, packages)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error executing brew template: %w", err))
 		return
 	}
 
@@ -64,13 +65,13 @@ set -x
 
 	tmpl, err = template.New("checker").Parse(checkerTemplate)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error parsing checker template: %w", err))
 		return
 	}
 
 	checker, err := os.Create(checkerPath)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error creating version_checker.sh: %w", err))
 		return
 	}
 	defer checker.Close()
@@ -83,13 +84,13 @@ set -x
 	}
 	err = tmpl.Execute(checker, filteredPackages)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error executing checker template: %w", err))
 		return
 	}
 
 	err = os.Chmod(checkerPath, 0o755)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error setting executable permissions on version_checker.sh: %w", err))
 		return
 	}
 }
