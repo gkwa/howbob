@@ -10,6 +10,7 @@ func TestRun(t *testing.T) {
 	manifestPath := filepath.Join("testdata", "manifest.k")
 	brewfilePath := filepath.Join("testdata", "Brewfile")
 	checkerPath := filepath.Join("testdata", "version_checker.sh")
+	tapsPath := filepath.Join("testdata", "taps.sh")
 
 	err := os.MkdirAll("testdata", os.ModePerm)
 	if err != nil {
@@ -22,7 +23,7 @@ func TestRun(t *testing.T) {
 		t.Fatalf("Failed to copy manifest file: %v", err)
 	}
 
-	Brewfile(manifestPath, brewfilePath, checkerPath)
+	Brewfile(manifestPath, brewfilePath, checkerPath, tapsPath)
 
 	if _, err := os.Stat(brewfilePath); os.IsNotExist(err) {
 		t.Errorf("Expected Brewfile to be generated, but it was not found")
@@ -30,6 +31,10 @@ func TestRun(t *testing.T) {
 
 	if _, err := os.Stat(checkerPath); os.IsNotExist(err) {
 		t.Errorf("Expected version_checker.sh to be generated, but it was not found")
+	}
+
+	if _, err := os.Stat(tapsPath); os.IsNotExist(err) {
+		t.Errorf("Expected taps.sh to be generated, but it was not found")
 	}
 }
 

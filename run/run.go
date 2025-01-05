@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"os"
 	"sort"
+	"strings"
 	"text/template"
 
 	kcl "kcl-lang.io/kcl-go"
 )
 
-func Brewfile(manifestPath, brewfilePath, checkerPath string) {
+func Brewfile(manifestPath, brewfilePath, checkerPath, tapsPath string) {
 	result, err := kcl.Run(manifestPath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, fmt.Errorf("error running KCL: %w", err))
@@ -29,6 +30,19 @@ func Brewfile(manifestPath, brewfilePath, checkerPath string) {
 		pj := packages[j].(map[string]interface{})["check_installed"].(string)
 		return pi < pj
 	})
+
+	taps := make(map[string]bool)
+	for _, pkg := range packages {
+		pkgMap := pkg.(map[string]interface{})
+		name := pkgMap["name"].(string)
+		if strings.Contains(name, "/") {
+			parts := strings.Split(name, "/")
+			if len(parts) >= 2 {
+				tap := parts[0] + "/" + parts[1]
+				taps[tap] = true
+			}
+		}
+	}
 
 	brewTemplate := `
 {{- range $pkg := . }}
@@ -53,6 +67,21 @@ brew "{{ $pkg.name }}"
 	if err != nil {
 		fmt.Fprintln(os.Stderr, fmt.Errorf("error executing brew template: %w", err))
 		return
+	}
+
+	tapsFile, err := os.Create(tapsPath)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, fmt.Errorf("error creating taps file: %w", err))
+		return
+	}
+	defer tapsFile.Close()
+
+	for tap := range taps {
+		_, err = fmt.Fprintf(tapsFile, "brew tap %s\n", tap)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, fmt.Errorf("error writing to taps file: %w", err))
+			return
+		}
 	}
 
 	checkerTemplate := `#!/usr/bin/env bash

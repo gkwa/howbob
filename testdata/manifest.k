@@ -23,4 +23,8 @@
         name = "cdk8s"
         check_installed = "cdk8s --version"
     }
+    {
+        name = "golangci/tap/golangci-lint"
+        check_installed = "golangci-lint --version"
+    }
 ]}

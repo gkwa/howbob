@@ -18,7 +18,8 @@ to quickly create a Cobra application.`,
 		path, _ := cmd.Flags().GetString("path")
 		brewfile, _ := cmd.Flags().GetString("brewfile")
 		checker, _ := cmd.Flags().GetString("checker")
-		run.Brewfile(path, brewfile, checker)
+		taps, _ := cmd.Flags().GetString("taps")
+		run.Brewfile(path, brewfile, checker, taps)
 	},
 }
 
@@ -27,4 +28,5 @@ func init() {
 	runCmd.Flags().StringP("path", "p", "manifest.k", "Path to manifest.k")
 	runCmd.Flags().StringP("brewfile", "b", "Brewfile", "Path to Brewfile")
 	runCmd.Flags().StringP("checker", "c", "version_checker.sh", "Path to version_checker.sh")
+	runCmd.Flags().StringP("taps", "t", "taps.sh", "Path to taps file")
 }

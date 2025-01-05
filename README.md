@@ -9,6 +9,7 @@ howbob run --path=homebrew.k --output=Brewfile
 ```
 
 For example:
+
 ```
 # file: homebrew.k
 
