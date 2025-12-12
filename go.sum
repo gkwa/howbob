@@ -100,7 +100,7 @@ gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c h1:Hei/4ADfdWqJk1ZMxUNpqntN
 gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c/go.mod h1:JHkPIbrfpd72SG/EVd6muEfDQjcINNoR0C8j2r3qZ4Q=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=
 gopkg.in/yaml.v3 v3.0.1/go.mod h1:K4uyk7z7BCEPqu6E+C64Yfv1cQ7kz7rIZviUmN+EgEM=
-kcl-lang.io/kcl-go v0.12.1 h1:yJsh7zxZj1sxfQ8GiGw0ROydzHDpHFsLjMK9R+cpsfM=
-kcl-lang.io/kcl-go v0.12.1/go.mod h1:S9nodh+GW4Lu1IMomUTZhgN3sIoyotxOK3YsHf1+isI=
-kcl-lang.io/lib v0.12.1 h1:wxEI4Hkgg6nFJHNHfNdqvPg5Zf7UMWUL7zBVsnudo/8=
-kcl-lang.io/lib v0.12.1/go.mod h1:kK/P1DUXQD+HpdRuPMb4/f7U7Njr2q5VrihmDHjKtnw=
+kcl-lang.io/kcl-go v0.12.3 h1:YkTkj4UU9HIkGf/QFhNiA0VWeCMkzQWbWdZhXJfr3rE=
+kcl-lang.io/kcl-go v0.12.3/go.mod h1:0K/gcJnZJ7K+pANibL+zlsCFiibwRCrzMcuCZJIsiPc=
+kcl-lang.io/lib v0.12.3 h1:x/a4Nyl5Wa5gMrhu5dPLeZEho9ryXJXgHODXJ8xC9gk=
+kcl-lang.io/lib v0.12.3/go.mod h1:kK/P1DUXQD+HpdRuPMb4/f7U7Njr2q5VrihmDHjKtnw=
