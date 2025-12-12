@@ -8,7 +8,7 @@ require (
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
 	github.com/taylormonacelli/goldbug v0.0.6
-	kcl-lang.io/kcl-go v0.12.1
+	kcl-lang.io/kcl-go v0.12.3
 )
 
 require (
@@ -38,5 +38,5 @@ require (
 	google.golang.org/grpc v1.77.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	kcl-lang.io/lib v0.12.1 // indirect
+	kcl-lang.io/lib v0.12.3 // indirect
 )
